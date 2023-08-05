@@ -1,0 +1,232 @@
+// varaibles substitution 
+a = 10 
+echo a is ${a}
+// command substitution
+DATE = $(DATE)
+BASH = $(BASH)
+ADD=$(( 2+2 ))
+echo ADD of 2+2 = $ADD
+
+variable1="Hello"
+variable2="Bash"
+greeting="${variable1}, ${variable2}!"
+echo "${greeting} Welcome to the world of Bash scripting!"
+
+
+input() {
+  echo First Argument - $1
+  echo Second Argument - $2
+  echo All Arguments - $*
+  echo No of Arguments - $#
+}
+
+input abc 1234
+
+
+multiple arguments () {
+    echo third  argumnt - $3
+    echo argument - $*
+    echo how many - $#
+}
+multiple 1 2 3 "sai" true 
+
+a = 10 
+if [a -ge 10]then;
+echo "false"
+fi
+echo "true"
+
+// read input from user 
+read -p "Please enter your name: " name
+
+# Display a personalized greeting
+echo "Hello, $name! Welcome to the shell scripting world."
+ 
+ read -p "Enter name :::" name 
+ echo ${name}
+
+
+// loops in shell 
+
+# Based on expression
+a=10
+while [ $a -gt 0 ]; do
+  echo Hello
+  a=$(($a-1))
+  #break # this command can break the loop
+done
+
+# Based on Inputs
+for comp in frontend catalogue user ; do
+  echo Installing Component - $comp
+done
+
+
+a=10
+while [$a -gt 0]; do 
+  echo hello
+  a=$(($a-1))
+done
+
+#!/bin/bash
+
+fruits="apple banana cherry"
+for fruit in $fruits
+do
+    echo "I like $fruit"
+done
+
+
+#!/bin/bash
+
+colors=("red" "green" "blue")
+for color in "${colors[@]}"
+do
+    echo "Color: $color"
+done
+
+#!/bin/bash
+
+for number in {1..5}
+do
+    echo "Number: $number"
+done
+
+fruit1="fruits"
+fruit2="lemon"
+fruit3="apple"
+
+echo -e "$fruit1\n$fruit2\n$fruit3"
+
+fruits="fruits\nlemon\napple"
+echo -e "$fruits"
+
+
+
+
+ansible -i inv WEB -m ping -e ansible_user=centos -e ansible_password=DevOps321
+ansible -i inv WEB 
+
+- name: nginx installio process
+ hosts: WEB
+ become: true
+ tasks:
+ - name: Install inginx
+   ansible.builtin.yum:
+   name: httpd
+   state: latest
+ - name: Start nginx 
+  ansible.builtin.systemd:
+  state: enabled
+roles:
+  -sample 
+- name: print thr variable
+  hosts: all
+  vars: url
+  become: true
+  tasks: 
+  - name: print variable 
+  ansible.builtin.debug:
+    msg: URL = {{ URL }}
+
+
+- name: varaible
+  hosts: all
+  become: true
+  tasks:
+     - name: task1 
+       msg: var is {{url}}
+      
+
+
+
+ tasks:
+ - name: Print fruit name 
+   ansivle.built.in.debug: 
+   msg: fruit is true
+  when: fruit is carrot
+  - name 
+
+tasks:
+- name: Printing variable types
+vars:
+vegetable: tomato
+fruit: apple
+number: 1
+ansible.builtin.debug:
+msg: fruits are {fruits}, {vegetable}
+when: number is 1 
+
+tasks:
+- name: for loop usage 
+  ansible.builtin.debug:
+  msg: Fruit Name - "{{ item }}"
+  loop:
+     - 1 
+     - 2
+
+  loop:
+        - banana
+        - kiwi
+
+ - name: second for loop usage
+   ansible.builtin.debug:
+   msg: Item is {{item.1}} , quantiy is {{item.2}}
+   loops:
+   - { 1: "apple", 2 : "orange"}
+
+
+// github link for PR 
+   https://www.tomasbeuzen.com/post/git-fork-branch-pull/
+
+- name: template demo
+   hosts: localhost
+   vars: "this is sentence is printed"
+   connection: local 
+   become: true
+   tasks:
+   - name: copying name to destination 
+    ansible.builtin.template:
+    src: tmp.txt
+    dst: /home/tmp.txt
+    vars:
+    fruitname: true
+    vegetable: true
+    tasks:
+    - name: vegetable true 
+    ansible.builtin.debug:
+    msg: vegetable is printed {{vegetable}} 
+    when: vegetable true 
+
+    - name: fruit true 
+     ansible.builtin.debug:
+    msg: fruit is printed {{fruit}} 
+    when: fruit  true 
+
+    ansible -i inv /home/centos -m -e centos -e DevopS321 
+
+
+
+
+
+
+- name: INstall Nginx
+  hosts: WEB
+  become: true
+  tasks:
+    - name: Installl nginx
+      ansible.builtin.yum:
+        name: httpd
+        state: latest
+
+    - name: Start Nginx
+      ansible.builtin.systemd:
+        name: nginx
+        state: started
+        enabled: yes
+
+- name: INstall Nginx
+  hosts: WEB
+  become: true
+  roles:
+    - sample
